@@ -31,7 +31,7 @@
 #include "WPA/Andersen.h"
 #include "SABER/LeakChecker.h"
 #include "SVF-FE/PAGBuilder.h"
-
+#include "SSE.h"
 
 using namespace SVF;
 using namespace llvm;
@@ -147,46 +147,51 @@ int main(int argc, char ** argv) {
 
     SVFModule* svfModule = LLVMModuleSet::getLLVMModuleSet()->buildSVFModule(moduleNameVec);
 
-    /// Build Program Assignment Graph (PAG)
-		PAGBuilder builder;
-		PAG *pag = builder.build(svfModule);
-		pag->dump("pag");
+/// Build Program Assignment Graph (PAG)
+    PAGBuilder builder;
+    PAG *pag = builder.build(svfModule);
+    pag->dump("pag");
 
-		/// Create Andersen's pointer analysis
-		Andersen *ander = AndersenWaveDiff::createAndersenWaveDiff(pag);
+    /// Create Andersen's pointer analysis
+    Andersen *ander = AndersenWaveDiff::createAndersenWaveDiff(pag);
 
-		/// Query aliases
-		/// aliasQuery(ander,value1,value2);
+    /// Query aliases
+    /// aliasQuery(ander,value1,value2);
 
-		/// Print points-to information
-		/// printPts(ander, value1);
+    /// Print points-to information
+    /// printPts(ander, value1);
 
-		/// Call Graph
-		PTACallGraph *callgraph = ander->getPTACallGraph();
-		callgraph->dump("callgraph");
+    /// Call Graph
+    PTACallGraph *callgraph = ander->getPTACallGraph();
+    callgraph->dump("callgraph");
 
-		/// ICFG
-		ICFG *icfg = pag->getICFG();
-		icfg->dump("icfg");
+    /// ICFG
+    ICFG *icfg = pag->getICFG();
+    icfg->dump("icfg");
 
-		/// Value-Flow Graph (VFG)
-		VFG *vfg = new VFG(callgraph);
-		vfg->dump("vfg");
+    /// Value-Flow Graph (VFG)
+    VFG *vfg = new VFG(callgraph);
+    vfg->dump("vfg");
 
-		/// Sparse value-flow graph (SVFG)
-		SVFGBuilder svfBuilder;
-		SVFG *svfg = svfBuilder.buildFullSVFGWithoutOPT(ander);
-		svfg->dump("svfg");
+    /// Sparse value-flow graph (SVFG)
+    SVFGBuilder svfBuilder;
+    SVFG *svfg = svfBuilder.buildFullSVFGWithoutOPT(ander);
+    svfg->dump("svfg");
 
-		/// Collect uses of an LLVM Value
-		/// traverseOnVFG(svfg, value);
+    /// Collect uses of an LLVM Value
+    /// traverseOnVFG(svfg, value);
 
-		/// Collect all successor nodes on ICFG
-		/// traverseOnICFG(icfg, value);
-		
-		LeakChecker *saber = new LeakChecker(); // if no checker is specified, we use leak checker as the default one.
-		saber->runOnModule(svfModule);
-	
+    /// Collect all successor nodes on ICFG
+    /// traverseOnICFG(icfg, value);
+
+    LeakChecker *saber = new LeakChecker(); // if no checker is specified, we use leak checker as the default one.
+    saber->runOnModule(svfModule);
+    SSE &sse = SSE::getInstance();
+    //give the src and dst node number to get the symbolic analysis
+    ICFGNode* src = icfg->getGNode(2);
+    ICFGNode* dst = icfg->getGNode(16);
+    sse.check_reachability(src,dst);
+
 
     return 0;
 }

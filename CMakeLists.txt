@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 3.4.3)
+project("SVF-ex")
 if (DEFINED LLVM_DIR)
         set(ENV{LLVM_DIR} "${LLVM_DIR}")
     endif()
@@ -42,16 +43,14 @@ endif()
 
 if(CMAKE_BUILD_TYPE MATCHES "Debug")
     MESSAGE (STATUS "building SVF in debug mode")
-    set(SVF_LIB "${SVF_DIR}/Debug-build/lib/libSvf.a")
-    set(LLVMCudd "${SVF_DIR}/Debug-build/lib/CUDD/libCudd.a")
+    LINK_DIRECTORIES(${SVF_DIR}/Debug-build/lib ${SVF_DIR}/Debug-build/lib/CUDD/)
 else()
     MESSAGE (STATUS "building SVF in release mode")
-    set(SVF_LIB "${SVF_DIR}/Release-build/lib/libSvf.a")
-    set(LLVMCudd "${SVF_DIR}/Release-build/lib/CUDD/libCudd.a")
+    LINK_DIRECTORIES(${SVF_DIR}/Release-build/lib ${SVF_DIR}/Release-build/lib/CUDD/)
 endif()
-set(SVF_HEADER "${SVF_DIR}/include")
-include_directories(${SVF_HEADER})
-
-
+set(SVF_HEADER "${SVF_DIR}/include" )
+set(Z3_HEADER "${Z3_DIR}/include/")
+include_directories(${SVF_HEADER} ${Z3_HEADER})
+LINK_DIRECTORIES(${Z3_DIR}/bin)
 
 add_subdirectory(src)
