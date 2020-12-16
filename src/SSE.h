@@ -16,7 +16,7 @@
 using namespace z3;
 using namespace SVF;
 using namespace std;
-
+using namespace llvm;
 // static symbolic execution
 class SSE
 {
@@ -156,13 +156,11 @@ public:
     {
         pair<expr, expr> expr_pair = getExprFromEdge(pagEdge);
         cout << "UOP" << "\n";
+        SVFUtil::outs() << "cmpsrc : " <<  *pagEdge->getSrcNode() <<"\n";
+        SVFUtil::outs() << "cmpdst : " <<  *pagEdge->getDstNode() << "\n";
         //when test the concrete number, keep on eye with the compare instructions implies
         eV.push_back(implies((bool)flag,expr_pair.first == expr_pair.second));
-
     }
-
-
-
 
 
     //FCMP_FALSE =  0,  ///< 0 0 0 0    Always false (always folded)

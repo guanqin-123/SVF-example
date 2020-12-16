@@ -67,6 +67,16 @@ pair<expr,expr>SSE::getExprFromEdge(const PAGEdge* edge) {
     string dstId = id_to_str(dst->getId());
     expr NODE(srcId) = this->Ctx.int_const(("node"+srcId).c_str());
     expr NODE(dstId) = this->Ctx.int_const(("node"+dstId).c_str());
+    //  ptr form -> acs (three types of ptr:  addrsstaken-ptr toplevel-ptr  normal-ptr
+    //ConstantData
+    if (edge->getSrcNode()->isConstantData()){
+        int64_t srcVal = SVFUtil::dyn_cast<llvm::ConstantInt>(edge->getSrcNode()->getValue())->getSExtValue();
+        NODE(srcId) = this->Ctx.real_val(srcVal);
+    }
+    if (edge->getDstNode()->isConstantData()){
+        int64_t dstVal = SVFUtil::dyn_cast<llvm::ConstantInt>(edge->getDstNode()->getValue())->getSExtValue();
+        NODE(dstId) = this->Ctx.real_val(dstVal);
+    }
     return make_pair(NODE(srcId),NODE(dstId));
 }
 vector<solver> SSE::sse_solutions(vector<EXPR_V> &exprPaths) {
@@ -82,5 +92,6 @@ vector<solver> SSE::sse_solutions(vector<EXPR_V> &exprPaths) {
         std::cout << "---------finish analysis --------- " << "\n";
         std::cout << s.check() << "\n";
         std::cout << s.assertions()<< "\n";
+        std::cout << s.get_model();
     }
 }
