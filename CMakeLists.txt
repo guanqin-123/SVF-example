@@ -1,5 +1,20 @@
 cmake_minimum_required(VERSION 3.4.3)
-project("SVF-ex")
+project("SVF-SSE")
+#setup for google test when first executed
+configure_file(CMakeLists.txt.in googletest-download/CMakeLists.txt)
+execute_process(COMMAND ${CMAKE_COMMAND} -G "${CMAKE_GENERATOR}" .
+  RESULT_VARIABLE result
+  WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/googletest-download )
+if(result)
+  message(FATAL_ERROR "CMake step for googletest failed: ${result}")
+endif()
+execute_process(COMMAND ${CMAKE_COMMAND} --build .
+  RESULT_VARIABLE result
+  WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/googletest-download )
+if(result)
+  message(FATAL_ERROR "Build step for googletest failed: ${result}")
+endif()
+# test env LLVM clang 10 path as $LLVM_DIR 
 if (DEFINED LLVM_DIR)
         set(ENV{LLVM_DIR} "${LLVM_DIR}")
     endif()
@@ -28,7 +43,7 @@ WARNING: The LLVM_DIR var was not set (required for an out-of-source build)!\n\
 Please set this to environment variable to point to the LLVM build directory\
 (e.g. on linux: export LLVM_DIR=/path/to/llvm/build/dir)")
 endif()
-
+# test env SVF path as $SVF_DIR 
 if (EXISTS "${SVF_DIR}")
 else()
     set(SVF_DIR $ENV{SVF_DIR})
