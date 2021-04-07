@@ -37,13 +37,10 @@ public:
         return container;
     }
     void DFS(std::set<const ICFGNode *> &visited, std::vector<const ICFGNode *> &path, std::stack<const Instruction *> &callstack, const ICFGNode *src, const ICFGNode *dst);
-    
+    void SSEsolve(std::vector<const ICFGNode *>& path);
 private:
     
     PAG *pag;
-
-    
-
 };
 
 

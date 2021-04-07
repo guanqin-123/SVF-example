@@ -1,0 +1,35 @@
+digraph "ICFG" {
+	label="ICFG";
+
+	Node0x103a13b90 [shape=record,color=green,label="{NodeID: 14\nFunExitBlockNode ID: 14 Exit(\{ ln: 14  cl: 23  fl: ./testcase/src/test1.c \})\n \{fun: main\}}"];
+	Node0x103a139b0 [shape=record,color=black,label="{NodeID: 13\nIntraBlockNode ID: 13   ret i32 0, !dbg !29 \{fun: main\}}"];
+	Node0x103a139b0 -> Node0x103a13b90[style=solid];
+	Node0x103a13700 [shape=record,color=blue,label="{NodeID: 12\nRetBlockNode ID: 12   %call1 = call i8* @sink(i8* %call), !dbg !27 \{fun: main\}}"];
+	Node0x103a13700 -> Node0x103a139b0[style=solid];
+	Node0x103a134c0 [shape=record,color=red,label="{NodeID: 11\nCallBlockNode ID: 11   %call1 = call i8* @sink(i8* %call), !dbg !27 \{fun: main\}|{|<s1>0x103a08ba0}}"];
+	Node0x103a134c0 -> Node0x103a13700[style=solid];
+	Node0x103a134c0:s1 -> Node0x103a12d80[style=solid,color=red];
+	Node0x103a13300 [shape=record,color=blue,label="{NodeID: 10\nRetBlockNode ID: 10   %call = call i8* @source(), !dbg !24 \{fun: main\}}"];
+	Node0x103a13300 -> Node0x103a134c0[style=solid];
+	Node0x103a131c0 [shape=record,color=red,label="{NodeID: 9\nCallBlockNode ID: 9   %call = call i8* @source(), !dbg !24 \{fun: main\}|{|<s1>0x103a08618}}"];
+	Node0x103a131c0 -> Node0x103a13300[style=solid];
+	Node0x103a131c0:s1 -> Node0x103a12980[style=solid,color=red];
+	Node0x103a130f0 [shape=record,color=yellow,label="{NodeID: 8\nFunEntryBlockNode ID: 8 Entry(\{ in line: 13 file: ./testcase/src/test1.c \})\n \{fun: main\}}"];
+	Node0x103a130f0 -> Node0x103a12900[style=solid];
+	Node0x103a130f0 -> Node0x103a131c0[style=solid];
+	Node0x103a12fa0 [shape=record,color=green,label="{NodeID: 7\nFunExitBlockNode ID: 7 Exit(\{ ln: 0  cl: 0  fl: ./testcase/src/test1.c \})\n \{fun: sink\}|{<s0>0x103a08ba0}}"];
+	Node0x103a12fa0:s0 -> Node0x103a13700[style=solid,color=blue];
+	Node0x103a12e80 [shape=record,color=black,label="{NodeID: 6\nIntraBlockNode ID: 6   ret i8* %s, !dbg !25 \{fun: sink\}CopyPE: [14\<--15]    ret i8* %s, !dbg !25\{ ln: 10  cl: 5  fl: ./testcase/src/test1.c \}}"];
+	Node0x103a12e80 -> Node0x103a12fa0[style=solid];
+	Node0x103a12d80 [shape=record,color=yellow,label="{NodeID: 5\nFunEntryBlockNode ID: 5 Entry(\{ in line: 9 file: ./testcase/src/test1.c \})\n \{fun: sink\}}"];
+	Node0x103a12d80 -> Node0x103a12e80[style=solid];
+	Node0x103a12c60 [shape=record,color=green,label="{NodeID: 4\nFunExitBlockNode ID: 4 Exit(\{  \})\n \{fun: source\}|{<s0>0x103a08618}}"];
+	Node0x103a12c60:s0 -> Node0x103a13300[style=solid,color=blue];
+	Node0x103a12b40 [shape=record,color=black,label="{NodeID: 3\nIntraBlockNode ID: 3   ret i8* %0, !dbg !20 \{fun: source\}CopyPE: [9\<--10]    ret i8* %0, !dbg !20\{ ln: 6  cl: 5  fl: ./testcase/src/test1.c \}}"];
+	Node0x103a12b40 -> Node0x103a12c60[style=solid];
+	Node0x103a12a20 [shape=record,color=black,label="{NodeID: 2\nIntraBlockNode ID: 2   %0 = getelementptr [25 x i8], [25 x i8]* @source.initstr, i64 0, i64 0 \{fun: source\}VariantGepPE: [10\<--4]    %0 = getelementptr [25 x i8], [25 x i8]* @source.initstr, i64 0, i64 0\{  \}}"];
+	Node0x103a12a20 -> Node0x103a12b40[style=solid];
+	Node0x103a12980 [shape=record,color=yellow,label="{NodeID: 1\nFunEntryBlockNode ID: 1 Entry(\{ in line: 3 file: ./testcase/src/test1.c \})\n \{fun: source\}}"];
+	Node0x103a12980 -> Node0x103a12a20[style=solid];
+	Node0x103a12900 [shape=record,color=purple,label="{NodeID: 0\nCopyPE: [2\<--3]  i8* null\{ Can only get source location for instruction, argument, global var or function. \}AddrPE: [4\<--6]  @source.initstr = internal global [25 x i8] c\"select* From City ..\\00\\00\\00\\00\\00\", align 16, !dbg !0\{ Glob  \}AddrPE: [7\<--8]  ; Function Attrs: noinline nounwind ssp uwtable\ndefine i8* @source() #0 !dbg !2 \{\nentry:\n  %0 = getelementptr [25 x i8], [25 x i8]* @source.initstr, i64 0, i64 0\n  ret i8* %0, !dbg !20\n\}\n\{ in line: 3 file: ./testcase/src/test1.c \}AddrPE: [12\<--13]  ; Function Attrs: noinline nounwind ssp uwtable\ndefine i8* @sink(i8* %s) #0 !dbg !21 \{\nentry:\n  call void @llvm.dbg.value(metadata i8* %s, metadata !24, metadata !DIExpression()), !dbg !25\n  ret i8* %s, !dbg !26\n\}\n\{ in line: 9 file: ./testcase/src/test1.c \}AddrPE: [18\<--19]  ; Function Attrs: nounwind readnone speculatable willreturn\ndeclare void @llvm.dbg.declare(metadata, metadata, metadata) #1\n\{  \}AddrPE: [24\<--25]  ; Function Attrs: noinline nounwind ssp uwtable\ndefine i32 @main() #0 !dbg !27 \{\nentry:\n  %call = call i8* @source(), !dbg !31\n  call void @llvm.dbg.value(metadata i8* %call, metadata !32, metadata !DIExpression()), !dbg !33\n  %call1 = call i8* @sink(i8* %call), !dbg !34\n  call void @llvm.dbg.value(metadata i8* %call1, metadata !35, metadata !DIExpression()), !dbg !33\n  ret i32 0, !dbg !36\n\}\n\{ in line: 13 file: ./testcase/src/test1.c \}AddrPE: [33\<--34]  ; Function Attrs: nounwind readnone speculatable willreturn\ndeclare void @llvm.dbg.value(metadata, metadata, metadata) #1\n\{  \}}"];
+}

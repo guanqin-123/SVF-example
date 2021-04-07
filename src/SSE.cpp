@@ -24,7 +24,7 @@ void SSE::DFS(std::set<const ICFGNode *> &visited, std::vector<const ICFGNode *>
         //current path reached, start verifying reasoning symbolic execution
         for(const ICFGNode * iNode:path)
         {
-            SVFUtil::outs()<<"{ " << iNode->getId() << " } -> ";
+            SVFUtil::outs()<<"{ " << iNode->toString() << " } -> ";
         }
         SVFUtil::outs()<< "End \n";
     }   
@@ -50,6 +50,14 @@ void SSE::DFS(std::set<const ICFGNode *> &visited, std::vector<const ICFGNode *>
     path.pop_back();
 }
 
+// void SSE::SSEsolve(std::vector<const ICFGNode *>& path)
+// {
+//     for(const ICFGNode* iNode: path)
+//     {
+        
+//     }
+// }
+
 
 
 
@@ -60,5 +68,6 @@ void SSE::DFS(std::set<const ICFGNode *> &visited, std::vector<const ICFGNode *>
 
 
 int main(){
-    test1();
+    ::testing::InitGoogleTest();
+    return RUN_ALL_TESTS();
 }

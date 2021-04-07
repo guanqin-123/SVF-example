@@ -1,0 +1,30 @@
+digraph "PAG" {
+	label="PAG";
+
+	Node0x10330d8a0 [shape=record,shape=Mrecord,label="{[main] RetPN ID: 46 unique return node for function main}"];
+	Node0x10330d7e0 [shape=record,shape=Mrecord,label="{[source] RetPN ID: 41 unique return node for function source|{<s0>\{ ln: 10  cl: 23  fl: ./testcase/src/test2.c \}}}"];
+	Node0x10330d7e0:s0 -> Node0x10330c6a0[color=black,style=dotted];
+	Node0x10330d710 [shape=record,shape=septagon,label="{[sink] FIObjPN ID: 61 (base object) sink \{  \}}"];
+	Node0x10330d710 -> Node0x10330c820[color=green];
+	Node0x10330d270 [shape=record,shape=septagon,label="{[main] FIObjPN ID: 45 (base object) main \{ in line: 6 file: ./testcase/src/test2.c \}}"];
+	Node0x10330d270 -> Node0x10330bd00[color=green];
+	Node0x10330d130 [shape=record,shape=septagon,label="{[source] FIObjPN ID: 40 (base object) source \{ in line: 3 file: ./testcase/src/test2.c \}}"];
+	Node0x10330d130 -> Node0x10330ba60[color=green];
+	Node0x10330c820 [shape=record,shape=circle,label="{[sink] ValPN ID: 60 declare void @sink(i32*) #2\n \{  \}}"];
+	Node0x10330c6a0 [shape=record,shape=circle,label="{[main] ValPN ID: 55   %call = call i32 @source(), !dbg !20 \{ ln: 10  cl: 23  fl: ./testcase/src/test2.c \}}"];
+	Node0x10330c6a0 -> Node0x10330bdc0[color=blue];
+	Node0x10330c5e0 [shape=record,shape=circle,label="{[main] ValPN ID: 54   br i1 %cmp, label %if.then, label %if.end, !dbg !19 \{ ln: 9  cl: 13  fl: ./testcase/src/test2.c \}}"];
+	Node0x10330c460 [shape=record,shape=circle,label="{[main] ValPN ID: 57   br label %if.end, !dbg !23 \{ ln: 11  cl: 9  fl: ./testcase/src/test2.c \}}"];
+	Node0x10330c3a0 [shape=record,shape=circle,label="{[main] ValPN ID: 53   %cmp = icmp sle i32 0, 1, !dbg !17 \{ ln: 9  cl: 15  fl: ./testcase/src/test2.c \}}"];
+	Node0x10330c3a0 -> Node0x10330c5e0[color=grey];
+	Node0x10330b740 [shape=record,shape=diamond,label="{DummyValPN ID: 3}"];
+	Node0x10330b740 -> Node0x10330b670[color=black];
+	Node0x10330b740 -> Node0x10330c460[color=grey];
+	Node0x10330b670 [shape=record,shape=diamond,label="{DummyValPN ID: 2}"];
+	Node0x10330ba60 [shape=record,shape=circle,label="{[source] ValPN ID: 39 ; Function Attrs: noinline nounwind ssp uwtable\ndefine i32 @source() #0 !dbg !8 \{\nentry:\n  ret i32 1, !dbg !13\n\}\n \{ in line: 3 file: ./testcase/src/test2.c \}}"];
+	Node0x10330d3b0 [shape=record,shape=septagon,label="{[main] FIObjPN ID: 48 (base object)   %num = alloca i32, align 4 \{ ln: 8 fl: ./testcase/src/test2.c \}}"];
+	Node0x10330d3b0 -> Node0x10330bdc0[color=green];
+	Node0x10330b5c0 [shape=record,shape=Mcircle,label="{DummyObjPN ID: 1}"];
+	Node0x10330bdc0 [shape=record,shape=circle,label="{[main] ValPN ID: 47   %num = alloca i32, align 4 \{ ln: 8 fl: ./testcase/src/test2.c \}}"];
+	Node0x10330bd00 [shape=record,shape=circle,label="{[main] ValPN ID: 44 ; Function Attrs: noinline nounwind ssp uwtable\ndefine i32 @main() #0 !dbg !14 \{\nentry:\n  %num = alloca i32, align 4\n  call void @llvm.dbg.value(metadata i32 0, metadata !15, metadata !DIExpression()), !dbg !16\n  call void @llvm.dbg.declare(metadata i32* %num, metadata !17, metadata !DIExpression()), !dbg !18\n  store i32 0, i32* %num, align 4, !dbg !18\n  %cmp = icmp sle i32 0, 1, !dbg !19\n  br i1 %cmp, label %if.then, label %if.end, !dbg !21\n\nif.then:                                          ; preds = %entry\n  %call = call i32 @source(), !dbg !22\n  store i32 %call, i32* %num, align 4, !dbg !24\n  br label %if.end, !dbg !25\n\nif.end:                                           ; preds = %if.then, %entry\n  call void @sink(i32* %num), !dbg !26\n  ret i32 0, !dbg !27\n\}\n \{ in line: 6 file: ./testcase/src/test2.c \}}"];
+}

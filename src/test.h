@@ -13,8 +13,7 @@
 using namespace SVF;
 using namespace llvm;
 using namespace std;
-// TEST(SSE, test1)
-void test1()
+TEST(SSE, test1)
 {
     SVF::SVFModule *svfModule = SVF::LLVMModuleSet::getLLVMModuleSet()->buildSVFModule({"./testcase/bc/test1.c.ll"});
 
@@ -43,18 +42,45 @@ void test1()
             sse->DFS(visited, path, callstack, src, snk);
         }
     }
+    SVF::LLVMModuleSet::releaseLLVMModuleSet();
+    SVF::PAG::releasePAG();
+
 
 }
 
-// int Test()
-// {
-//     // ::testing::InitGoogleTest();
-//     // return RUN_ALL_TESTS();
-    
-//     return 0;
-// }
+TEST(SSE, test2)
+{
+    SVF::SVFModule *svfModule = SVF::LLVMModuleSet::getLLVMModuleSet()->buildSVFModule({"./testcase/bc/test2.c.ll"});
 
+/// Build Program Assignment Graph (PAG)
+    PAGBuilder builder;
+    PAG *pag = builder.build(svfModule);
+    pag->dump(svfModule->getModuleIdentifier() + ".pag");
 
+    /// Create Andersen's pointer analysis
+    // Andersen *ander = AndersenWaveDiff::createAndersenWaveDiff(pag);
+    // ander->analyze();
+    // ander->dump(svfModule->getModuleIdentifier() + ".consG")
+    /// ICFG
+    ICFG *icfg = pag->getICFG();
+    icfg->dump(svfModule->getModuleIdentifier() + ".icfg");
+    SSE* sse = new SSE(pag);
+    std::vector<const ICFGNode *> path;
+    std::stack<const Instruction *>callstack;
+    std::set<const ICFGNode *> visited;
+    std::set<const CallBlockNode *> sources;
+    std::set<const CallBlockNode *> sinks;
+    for (const CallBlockNode *src : sse->identify("source",sources))
+    {
+        for (const CallBlockNode *snk : sse->identify("sink",sinks))
+        {
+            sse->DFS(visited, path, callstack, src, snk);
+        }
+    }
+    SVF::LLVMModuleSet::releaseLLVMModuleSet();
+    SVF::PAG::releasePAG();
+
+}
 
 
 

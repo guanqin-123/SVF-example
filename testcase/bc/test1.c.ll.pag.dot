@@ -1,0 +1,33 @@
+digraph "PAG" {
+	label="PAG";
+
+	Node0x103117dc0 [shape=record,shape=Mrecord,label="{[main] RetPN ID: 26 unique return node for function main}"];
+	Node0x103117b80 [shape=record,shape=Mrecord,label="{[sink] RetPN ID: 14 unique return node for function sink|{<s0>\{ ln: 15  cl: 15  fl: ./testcase/src/test1.c \}}}"];
+	Node0x103117b80:s0 -> Node0x103116c80[color=black,style=dotted];
+	Node0x103117ac0 [shape=record,shape=Mrecord,label="{[source] RetPN ID: 9 unique return node for function source|{<s0>\{ ln: 14  cl: 23  fl: ./testcase/src/test1.c \}}}"];
+	Node0x103117ac0:s0 -> Node0x103116b00[color=black,style=dotted];
+	Node0x1031179f0 [shape=record,shape=septagon,label="{[main] FIObjPN ID: 25 (base object) main \{ in line: 13 file: ./testcase/src/test1.c \}}"];
+	Node0x1031179f0 -> Node0x103116a40[color=green];
+	Node0x103117690 [shape=record,shape=septagon,label="{[sink] FIObjPN ID: 13 (base object) sink \{ in line: 9 file: ./testcase/src/test1.c \}}"];
+	Node0x103117690 -> Node0x1031162e0[color=green];
+	Node0x103117550 [shape=record,shape=septagon,label="{[source] FIObjPN ID: 8 (base object) source \{ in line: 3 file: ./testcase/src/test1.c \}}"];
+	Node0x103117550 -> Node0x103116040[color=green];
+	Node0x103117410 [shape=record,shape=septagon,label="{FIObjPN ID: 6 (base object) @source.initstr = internal global [25 x i8] c\"select* From City ..\\00\\00\\00\\00\\00\", align 16, !dbg !0 \{ Glob  \}}"];
+	Node0x103117410 -> Node0x103115f80[color=green];
+	Node0x1031172e0 [shape=record,shape=circle,label="{[source] ValPN ID: 10   %0 = getelementptr [25 x i8], [25 x i8]* @source.initstr, i64 0, i64 0 \{  \}}"];
+	Node0x1031172e0 -> Node0x103117ac0[color=black];
+	Node0x103116c80 [shape=record,shape=circle,label="{[main] ValPN ID: 29   %call1 = call i8* @sink(i8* %call), !dbg !27 \{ ln: 15  cl: 15  fl: ./testcase/src/test1.c \}}"];
+	Node0x103116040 [shape=record,shape=circle,label="{[source] ValPN ID: 7 ; Function Attrs: noinline nounwind ssp uwtable\ndefine i8* @source() #0 !dbg !2 \{\nentry:\n  %0 = getelementptr [25 x i8], [25 x i8]* @source.initstr, i64 0, i64 0\n  ret i8* %0, !dbg !20\n\}\n \{ in line: 3 file: ./testcase/src/test1.c \}}"];
+	Node0x1031163a0 [shape=record,shape=circle,label="{[sink] ValPN ID: 15 i8* %s \{ 0th arg sink in line: 9 file: ./testcase/src/test1.c \}}"];
+	Node0x1031163a0 -> Node0x103117b80[color=black];
+	Node0x103116b00 [shape=record,shape=circle,label="{[main] ValPN ID: 27   %call = call i8* @source(), !dbg !24 \{ ln: 14  cl: 23  fl: ./testcase/src/test1.c \}|{<s0>\{ ln: 15  cl: 15  fl: ./testcase/src/test1.c \}}}"];
+	Node0x103116b00:s0 -> Node0x1031163a0[color=black,style=dashed];
+	Node0x103115f80 [shape=record,shape=circle,label="{ValPN ID: 4 @source.initstr = internal global [25 x i8] c\"select* From City ..\\00\\00\\00\\00\\00\", align 16, !dbg !0 \{ Glob  \}}"];
+	Node0x103115f80 -> Node0x1031172e0[color=purple];
+	Node0x103115ba0 [shape=record,shape=diamond,label="{DummyValPN ID: 3}"];
+	Node0x103115ba0 -> Node0x103115ab0[color=black];
+	Node0x103115ab0 [shape=record,shape=diamond,label="{DummyValPN ID: 2}"];
+	Node0x1031162e0 [shape=record,shape=circle,label="{[sink] ValPN ID: 12 ; Function Attrs: noinline nounwind ssp uwtable\ndefine i8* @sink(i8* %s) #0 !dbg !21 \{\nentry:\n  call void @llvm.dbg.value(metadata i8* %s, metadata !24, metadata !DIExpression()), !dbg !25\n  ret i8* %s, !dbg !26\n\}\n \{ in line: 9 file: ./testcase/src/test1.c \}}"];
+	Node0x103116a40 [shape=record,shape=circle,label="{[main] ValPN ID: 24 ; Function Attrs: noinline nounwind ssp uwtable\ndefine i32 @main() #0 !dbg !27 \{\nentry:\n  %call = call i8* @source(), !dbg !31\n  call void @llvm.dbg.value(metadata i8* %call, metadata !32, metadata !DIExpression()), !dbg !33\n  %call1 = call i8* @sink(i8* %call), !dbg !34\n  call void @llvm.dbg.value(metadata i8* %call1, metadata !35, metadata !DIExpression()), !dbg !33\n  ret i32 0, !dbg !36\n\}\n \{ in line: 13 file: ./testcase/src/test1.c \}}"];
+	Node0x103115a00 [shape=record,shape=Mcircle,label="{DummyObjPN ID: 1}"];
+}
