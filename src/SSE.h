@@ -20,9 +20,31 @@ using namespace llvm;
 // static symbolic execution
 
 
+class SSE
+{
+public:
+    SSE(PAG* p): pag(p){};
+    std::set<const CallBlockNode *> &identify(const std::string& funName,std::set<const CallBlockNode *>& container)
+    {
+        for (const CallBlockNode *cs : pag->getCallSiteSet())
+        {
+            const SVFFunction *fun = SVFUtil::getCallee(cs->getCallSite());
+            if (fun->getName() == funName)
+            {
+                container.insert(cs);
+            }
+        }
+        return container;
+    }
+    void DFS(std::set<const ICFGNode *> &visited, std::vector<const ICFGNode *> &path, std::stack<const Instruction *> &callstack, const ICFGNode *src, const ICFGNode *dst);
+    
+private:
+    
+    PAG *pag;
 
-}
+    
 
+};
 
 
 

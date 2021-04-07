@@ -1,7 +1,6 @@
 // "/Users/charles/UTS/SVF-all/temp/SVF-Teaching-Solutions/Assignment-4/testcase/bc/test1.ll"
 #ifndef TEST_H_
 #define TEST_H_
-#include "Assignment-1.h"
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
 #include "SVF-FE/LLVMUtil.h"
@@ -14,41 +13,46 @@
 using namespace SVF;
 using namespace llvm;
 using namespace std;
-TEST(SSE, test1)
+// TEST(SSE, test1)
+void test1()
 {
-    SVFModule* svfModule = LLVMModuleSet::getLLVMModuleSet()->buildSVFModule("./testcase/bc/test1.ll");
+    SVF::SVFModule *svfModule = SVF::LLVMModuleSet::getLLVMModuleSet()->buildSVFModule({"./testcase/bc/test1.c.ll"});
 
 /// Build Program Assignment Graph (PAG)
     PAGBuilder builder;
     PAG *pag = builder.build(svfModule);
-    pag->dump("pag");
+    pag->dump(svfModule->getModuleIdentifier() + ".pag");
 
     /// Create Andersen's pointer analysis
-    Andersen *ander = AndersenWaveDiff::createAndersenWaveDiff(pag);
-
-
-    /// Call Graph
-    PTACallGraph *callgraph = ander->getPTACallGraph();
-    callgraph->dump("callgraph");
-
+    // Andersen *ander = AndersenWaveDiff::createAndersenWaveDiff(pag);
+    // ander->analyze();
+    // ander->dump(svfModule->getModuleIdentifier() + ".consG")
     /// ICFG
     ICFG *icfg = pag->getICFG();
-    icfg->dump("icfg");
+    icfg->dump(svfModule->getModuleIdentifier() + ".icfg");
+    SSE* sse = new SSE(pag);
+    std::vector<const ICFGNode *> path;
+    std::stack<const Instruction *>callstack;
+    std::set<const ICFGNode *> visited;
+    std::set<const CallBlockNode *> sources;
+    std::set<const CallBlockNode *> sinks;
+    for (const CallBlockNode *src : sse->identify("source",sources))
+    {
+        for (const CallBlockNode *snk : sse->identify("sink",sinks))
+        {
+            sse->DFS(visited, path, callstack, src, snk);
+        }
+    }
 
-    /// Value-Flow Graph (VFG)
-    VFG *vfg = new VFG(callgraph);
-    vfg->dump("vfg");
-
-    /// Sparse value-flow graph (SVFG)
-    SVFGBuilder svfBuilder;
-    SVFG *svfg = svfBuilder.buildFullSVFGWithoutOPT(ander);
-    svfg->dump("svfg");
-
-    LeakChecker *saber = new LeakChecker(); // if no checker is specified, we use leak checker as the default one.
-    saber->runOnModule(svfModule);
 }
 
-
+// int Test()
+// {
+//     // ::testing::InitGoogleTest();
+//     // return RUN_ALL_TESTS();
+    
+//     return 0;
+// }
 
 
 

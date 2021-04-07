@@ -8,4 +8,4 @@ target_link_libraries(svf-ex ${llvm_libs} Svf Cudd)
 # briefly revised to add z3 lib, if failed please compile with -v para and request on issues
 target_link_libraries(svf-ex z3 gtest gmock)
 set_target_properties( svf-ex PROPERTIES
-                       RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin )
+                       RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR} )

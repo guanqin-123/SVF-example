@@ -68,4 +68,10 @@ set(Z3_HEADER "${Z3_DIR}/include/")
 include_directories(${SVF_HEADER} ${Z3_HEADER})
 LINK_DIRECTORIES(${Z3_DIR}/bin)
 
+
+# googletest
+add_subdirectory(${CMAKE_CURRENT_BINARY_DIR}/googletest-src
+                 ${CMAKE_CURRENT_BINARY_DIR}/googletest-build
+                 EXCLUDE_FROM_ALL)
+#sse 
 add_subdirectory(src)
