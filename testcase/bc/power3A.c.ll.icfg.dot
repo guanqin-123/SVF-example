@@ -1,0 +1,29 @@
+digraph "ICFG" {
+	label="ICFG";
+
+	Node0x103d11cb0 [shape=record,color=black,label="{NodeID: 12\nIntraBlockNode ID: 12   br label %for.cond, !dbg !26, !llvm.loop !27 \{fun: power3_A\}}"];
+	Node0x103d11cb0 -> Node0x103d110a0[style=solid];
+	Node0x103d11a90 [shape=record,color=black,label="{NodeID: 11\nIntraBlockNode ID: 11   %inc = add nsw i32 %i.0, 1, !dbg !25 \{fun: power3_A\}}"];
+	Node0x103d11a90 -> Node0x103d11cb0[style=solid];
+	Node0x103d11970 [shape=record,color=green,label="{NodeID: 10\nFunExitBlockNode ID: 10 Exit(\{ ln: 6  cl: 3  fl: ./testcase/src/power3A.c \})\n \{fun: power3_A\}}"];
+	Node0x103d11880 [shape=record,color=black,label="{NodeID: 9\nIntraBlockNode ID: 9   br label %for.inc, !dbg !24 \{fun: power3_A\}}"];
+	Node0x103d11880 -> Node0x103d11a90[style=solid];
+	Node0x103d11700 [shape=record,color=black,label="{NodeID: 8\nIntraBlockNode ID: 8   ret i32 %out_a.0, !dbg !29 \{fun: power3_A\}}"];
+	Node0x103d11700 -> Node0x103d11970[style=solid];
+	Node0x103d115b0 [shape=record,color=black,label="{NodeID: 7\nIntraBlockNode ID: 7   %mul = mul nsw i32 %out_a.0, %in, !dbg !23 \{fun: power3_A\}}"];
+	Node0x103d115b0 -> Node0x103d11880[style=solid];
+	Node0x103d11490 [shape=record,color=black,label="{NodeID: 6\nIntraBlockNode ID: 6   br i1 %cmp, label %for.body, label %for.end, !dbg !22 \{fun: power3_A\}}"];
+	Node0x103d11490 -> Node0x103d115b0[style=solid];
+	Node0x103d11490 -> Node0x103d11700[style=solid];
+	Node0x103d11340 [shape=record,color=black,label="{NodeID: 5\nIntraBlockNode ID: 5   %cmp = icmp slt i32 %i.0, 2, !dbg !20 \{fun: power3_A\}}"];
+	Node0x103d11340 -> Node0x103d11490[style=solid];
+	Node0x103d111c0 [shape=record,color=black,label="{NodeID: 4\nIntraBlockNode ID: 4   %out_a.0 = phi i32 [ %in, %entry ], [ %mul, %for.inc ], !dbg !14 \{fun: power3_A\}}"];
+	Node0x103d111c0 -> Node0x103d11340[style=solid];
+	Node0x103d110a0 [shape=record,color=black,label="{NodeID: 3\nIntraBlockNode ID: 3   %i.0 = phi i32 [ 0, %entry ], [ %inc, %for.inc ], !dbg !19 \{fun: power3_A\}}"];
+	Node0x103d110a0 -> Node0x103d111c0[style=solid];
+	Node0x103d10f80 [shape=record,color=black,label="{NodeID: 2\nIntraBlockNode ID: 2   br label %for.cond, !dbg !17 \{fun: power3_A\}}"];
+	Node0x103d10f80 -> Node0x103d110a0[style=solid];
+	Node0x103d0b7c0 [shape=record,color=yellow,label="{NodeID: 1\nFunEntryBlockNode ID: 1 Entry(\{ in line: 1 file: ./testcase/src/power3A.c \})\n \{fun: power3_A\}}"];
+	Node0x103d0b7c0 -> Node0x103d10f80[style=solid];
+	Node0x103d0b740 [shape=record,color=purple,label="{NodeID: 0\nCopyPE: [2\<--3]  i8* null\{ Can only get source location for instruction, argument, global var or function. \}AddrPE: [4\<--5]  ; Function Attrs: noinline nounwind ssp uwtable\ndefine i32 @power3_A(i32 %in) #0 !dbg !8 \{\nentry:\n  call void @llvm.dbg.value(metadata i32 %in, metadata !13, metadata !DIExpression()), !dbg !14\n  call void @llvm.dbg.value(metadata i32 %in, metadata !15, metadata !DIExpression()), !dbg !14\n  call void @llvm.dbg.value(metadata i32 0, metadata !16, metadata !DIExpression()), !dbg !14\n  br label %for.cond, !dbg !17\n\nfor.cond:                                         ; preds = %for.inc, %entry\n  %i.0 = phi i32 [ 0, %entry ], [ %inc, %for.inc ], !dbg !19\n  %out_a.0 = phi i32 [ %in, %entry ], [ %mul, %for.inc ], !dbg !14\n  call void @llvm.dbg.value(metadata i32 %out_a.0, metadata !15, metadata !DIExpression()), !dbg !14\n  call void @llvm.dbg.value(metadata i32 %i.0, metadata !16, metadata !DIExpression()), !dbg !14\n  %cmp = icmp slt i32 %i.0, 2, !dbg !20\n  br i1 %cmp, label %for.body, label %for.end, !dbg !22\n\nfor.body:                                         ; preds = %for.cond\n  %mul = mul nsw i32 %out_a.0, %in, !dbg !23\n  call void @llvm.dbg.value(metadata i32 %mul, metadata !15, metadata !DIExpression()), !dbg !14\n  br label %for.inc, !dbg !24\n\nfor.inc:                                          ; preds = %for.body\n  %inc = add nsw i32 %i.0, 1, !dbg !25\n  call void @llvm.dbg.value(metadata i32 %inc, metadata !16, metadata !DIExpression()), !dbg !14\n  br label %for.cond, !dbg !26, !llvm.loop !27\n\nfor.end:                                          ; preds = %for.cond\n  ret i32 %out_a.0, !dbg !29\n\}\n\{ in line: 1 file: ./testcase/src/power3A.c \}AddrPE: [30\<--31]  ; Function Attrs: nounwind readnone speculatable willreturn\ndeclare void @llvm.dbg.declare(metadata, metadata, metadata) #1\n\{  \}AddrPE: [36\<--37]  ; Function Attrs: nounwind readnone speculatable willreturn\ndeclare void @llvm.dbg.value(metadata, metadata, metadata) #1\n\{  \}}"];
+}

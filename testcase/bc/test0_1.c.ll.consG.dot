@@ -1,0 +1,25 @@
+digraph "ConstraintG" {
+	label="ConstraintG";
+
+	Node0x103b14540 [shape=record,shape=Mcircle,label="{1}"];
+	Node0x103b141a0 [shape=record,shape=circle,label="{35:source}"];
+	Node0x103b13fd0 [shape=record,shape=circle,label="{58:call}"];
+	Node0x103b13c30 [shape=record,shape=diamond,label="{2:dummyVal}"];
+	Node0x103b13550 [shape=record,shape=circle,label="{43:s}"];
+	Node0x103b13030 [shape=record,shape=circle,label="{40:sink}"];
+	Node0x103b12ac0 [shape=record,shape=diamond,label="{3:dummyVal}"];
+	Node0x103b12ac0 -> Node0x103b13c30[color=black];
+	Node0x103b12720 [shape=record,shape=circle,label="{52:main}"];
+	Node0x103b12550 [shape=record,shape=circle,label="{55:injection}"];
+	Node0x103b12550 -> Node0x103b13550[color=black];
+	Node0x103b11630 [shape=record,shape=septagon,label="{36}"];
+	Node0x103b11630 -> Node0x103b141a0[color=green];
+	Node0x103b11460 [shape=record,shape=septagon,label="{41}"];
+	Node0x103b11460 -> Node0x103b13030[color=green];
+	Node0x103b10e90 [shape=record,shape=septagon,label="{56}"];
+	Node0x103b10e90 -> Node0x103b12550[color=green];
+	Node0x103b10cc0 [shape=record,shape=Mrecord,label="{37}"];
+	Node0x103b11060 [shape=record,shape=septagon,label="{53}"];
+	Node0x103b11060 -> Node0x103b12720[color=green];
+	Node0x103b10720 [shape=record,shape=Mrecord,label="{54}"];
+}

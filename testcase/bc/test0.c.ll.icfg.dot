@@ -1,0 +1,33 @@
+digraph "ICFG" {
+	label="ICFG";
+
+	Node0x103d12120 [shape=record,color=green,label="{NodeID: 13\nFunExitBlockNode ID: 13 Exit(\{ ln: 11  cl: 21  fl: ./testcase/src/test0.c \})\n \{fun: main\}}"];
+	Node0x103d11f50 [shape=record,color=black,label="{NodeID: 12\nIntraBlockNode ID: 12   ret i32 0, !dbg !17 \{fun: main\}}"];
+	Node0x103d11f50 -> Node0x103d12120[style=solid];
+	Node0x103d11c40 [shape=record,color=blue,label="{NodeID: 11\nRetBlockNode ID: 11   call void @sink(i32 %call), !dbg !16 \{fun: main\}}"];
+	Node0x103d11c40 -> Node0x103d11f50[style=solid];
+	Node0x103d11b00 [shape=record,color=red,label="{NodeID: 10\nCallBlockNode ID: 10   call void @sink(i32 %call), !dbg !16 \{fun: main\}|{|<s1>0x103d08760}}"];
+	Node0x103d11b00 -> Node0x103d11c40[style=solid];
+	Node0x103d11b00:s1 -> Node0x103d113f0[style=solid,color=red];
+	Node0x103d11940 [shape=record,color=blue,label="{NodeID: 9\nRetBlockNode ID: 9   %call = call i32 @source(), !dbg !13 \{fun: main\}}"];
+	Node0x103d11940 -> Node0x103d11b00[style=solid];
+	Node0x103d11800 [shape=record,color=red,label="{NodeID: 8\nCallBlockNode ID: 8   %call = call i32 @source(), !dbg !13 \{fun: main\}|{|<s1>0x103d081d8}}"];
+	Node0x103d11800 -> Node0x103d11940[style=solid];
+	Node0x103d11800:s1 -> Node0x103d05c20[style=solid,color=red];
+	Node0x103d11730 [shape=record,color=yellow,label="{NodeID: 7\nFunEntryBlockNode ID: 7 Entry(\{ in line: 10 file: ./testcase/src/test0.c \})\n \{fun: main\}}"];
+	Node0x103d11730 -> Node0x103d05b50[style=solid];
+	Node0x103d11730 -> Node0x103d11800[style=solid];
+	Node0x103d115e0 [shape=record,color=green,label="{NodeID: 6\nFunExitBlockNode ID: 6 Exit(\{ ln: 0  cl: 0  fl: ./testcase/src/test0.c \})\n \{fun: sink\}|{<s0>0x103d08760}}"];
+	Node0x103d115e0:s0 -> Node0x103d11c40[style=solid,color=blue];
+	Node0x103d11490 [shape=record,color=black,label="{NodeID: 5\nIntraBlockNode ID: 5   ret void, !dbg !15 \{fun: sink\}}"];
+	Node0x103d11490 -> Node0x103d115e0[style=solid];
+	Node0x103d113f0 [shape=record,color=yellow,label="{NodeID: 4\nFunEntryBlockNode ID: 4 Entry(\{ in line: 7 file: ./testcase/src/test0.c \})\n \{fun: sink\}}"];
+	Node0x103d113f0 -> Node0x103d11490[style=solid];
+	Node0x103d112d0 [shape=record,color=green,label="{NodeID: 3\nFunExitBlockNode ID: 3 Exit(\{ ln: 4  cl: 5  fl: ./testcase/src/test0.c \})\n \{fun: source\}|{<s0>0x103d081d8}}"];
+	Node0x103d112d0:s0 -> Node0x103d11940[style=solid,color=blue];
+	Node0x103d111b0 [shape=record,color=black,label="{NodeID: 2\nIntraBlockNode ID: 2   ret i32 1, !dbg !13 \{fun: source\}}"];
+	Node0x103d111b0 -> Node0x103d112d0[style=solid];
+	Node0x103d05c20 [shape=record,color=yellow,label="{NodeID: 1\nFunEntryBlockNode ID: 1 Entry(\{ in line: 3 file: ./testcase/src/test0.c \})\n \{fun: source\}}"];
+	Node0x103d05c20 -> Node0x103d111b0[style=solid];
+	Node0x103d05b50 [shape=record,color=purple,label="{NodeID: 0\nCopyPE: [2\<--3]  i8* null\{ Can only get source location for instruction, argument, global var or function. \}AddrPE: [4\<--5]  ; Function Attrs: noinline nounwind ssp uwtable\ndefine i32 @source() #0 !dbg !8 \{\nentry:\n  ret i32 1, !dbg !13\n\}\n\{ in line: 3 file: ./testcase/src/test0.c \}AddrPE: [9\<--10]  ; Function Attrs: noinline nounwind ssp uwtable\ndefine void @sink(i32 %s) #0 !dbg !14 \{\nentry:\n  call void @llvm.dbg.value(metadata i32 %s, metadata !17, metadata !DIExpression()), !dbg !18\n  ret void, !dbg !19\n\}\n\{ in line: 7 file: ./testcase/src/test0.c \}AddrPE: [15\<--16]  ; Function Attrs: nounwind readnone speculatable willreturn\ndeclare void @llvm.dbg.declare(metadata, metadata, metadata) #1\n\{  \}AddrPE: [21\<--22]  ; Function Attrs: noinline nounwind ssp uwtable\ndefine i32 @main() #0 !dbg !20 \{\nentry:\n  %call = call i32 @source(), !dbg !21\n  call void @llvm.dbg.value(metadata i32 %call, metadata !22, metadata !DIExpression()), !dbg !23\n  call void @sink(i32 %call), !dbg !24\n  ret i32 0, !dbg !25\n\}\n\{ in line: 10 file: ./testcase/src/test0.c \}AddrPE: [29\<--30]  ; Function Attrs: nounwind readnone speculatable willreturn\ndeclare void @llvm.dbg.value(metadata, metadata, metadata) #1\n\{  \}}"];
+}

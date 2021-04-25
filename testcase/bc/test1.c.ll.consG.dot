@@ -1,0 +1,33 @@
+digraph "ConstraintG" {
+	label="ConstraintG";
+
+	Node0x103d09a40 [shape=record,shape=Mcircle,label="{1}"];
+	Node0x103d09870 [shape=record,shape=circle,label="{24:main}"];
+	Node0x103d096a0 [shape=record,shape=circle,label="{12:sink}"];
+	Node0x103d094d0 [shape=record,shape=diamond,label="{2:dummyVal}"];
+	Node0x103d09300 [shape=record,shape=diamond,label="{3:dummyVal}"];
+	Node0x103d09300 -> Node0x103d094d0[color=black];
+	Node0x103d09130 [shape=record,shape=circle,label="{4:source.initstr}"];
+	Node0x103d09130 -> Node0x103d06ed0[color=purple];
+	Node0x103d08f60 [shape=record,shape=circle,label="{27:call}"];
+	Node0x103d08f60 -> Node0x103d08d90[color=black];
+	Node0x103d08d90 [shape=record,shape=circle,label="{15:s}"];
+	Node0x103d08d90 -> Node0x103d06010[color=black];
+	Node0x103d08be0 [shape=record,shape=circle,label="{7:source}"];
+	Node0x103d06ed0 [shape=record,shape=circle,label="{10:}"];
+	Node0x103d06ed0 -> Node0x103d061e0[color=black];
+	Node0x103d07a50 [shape=record,shape=circle,label="{29:call1}"];
+	Node0x103d06d00 [shape=record,shape=septagon,label="{6}"];
+	Node0x103d06d00 -> Node0x103d09130[color=green];
+	Node0x103d06b30 [shape=record,shape=septagon,label="{8}"];
+	Node0x103d06b30 -> Node0x103d08be0[color=green];
+	Node0x103d061e0 [shape=record,shape=Mrecord,label="{9}"];
+	Node0x103d061e0 -> Node0x103d08f60[color=black];
+	Node0x103d063b0 [shape=record,shape=septagon,label="{25}"];
+	Node0x103d063b0 -> Node0x103d09870[color=green];
+	Node0x103d06010 [shape=record,shape=Mrecord,label="{14}"];
+	Node0x103d06010 -> Node0x103d07a50[color=black];
+	Node0x103d06960 [shape=record,shape=septagon,label="{13}"];
+	Node0x103d06960 -> Node0x103d096a0[color=green];
+	Node0x103d05a70 [shape=record,shape=Mrecord,label="{26}"];
+}

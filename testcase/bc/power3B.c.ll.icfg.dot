@@ -1,0 +1,14 @@
+digraph "ICFG" {
+	label="ICFG";
+
+	Node0x103d0f330 [shape=record,color=green,label="{NodeID: 5\nFunExitBlockNode ID: 5 Exit(\{ ln: 0  cl: 0  fl: ./testcase/src/power3B.c \})\n \{fun: power3_B\}}"];
+	Node0x103d0f1b0 [shape=record,color=black,label="{NodeID: 4\nIntraBlockNode ID: 4   ret i32 %mul1, !dbg !18 \{fun: power3_B\}}"];
+	Node0x103d0f1b0 -> Node0x103d0f330[style=solid];
+	Node0x103d0f090 [shape=record,color=black,label="{NodeID: 3\nIntraBlockNode ID: 3   %mul1 = mul nsw i32 %mul, %n, !dbg !16 \{fun: power3_B\}}"];
+	Node0x103d0f090 -> Node0x103d0f1b0[style=solid];
+	Node0x103d0ef70 [shape=record,color=black,label="{NodeID: 2\nIntraBlockNode ID: 2   %mul = mul nsw i32 %n, %n, !dbg !15 \{fun: power3_B\}}"];
+	Node0x103d0ef70 -> Node0x103d0f090[style=solid];
+	Node0x103d045f0 [shape=record,color=yellow,label="{NodeID: 1\nFunEntryBlockNode ID: 1 Entry(\{ in line: 1 file: ./testcase/src/power3B.c \})\n \{fun: power3_B\}}"];
+	Node0x103d045f0 -> Node0x103d0ef70[style=solid];
+	Node0x103d09a70 [shape=record,color=purple,label="{NodeID: 0\nCopyPE: [2\<--3]  i8* null\{ Can only get source location for instruction, argument, global var or function. \}AddrPE: [4\<--5]  ; Function Attrs: noinline nounwind ssp uwtable\ndefine i32 @power3_B(i32 %n) #0 !dbg !8 \{\nentry:\n  call void @llvm.dbg.value(metadata i32 %n, metadata !13, metadata !DIExpression()), !dbg !14\n  %mul = mul nsw i32 %n, %n, !dbg !15\n  %mul1 = mul nsw i32 %mul, %n, !dbg !16\n  call void @llvm.dbg.value(metadata i32 %mul1, metadata !17, metadata !DIExpression()), !dbg !14\n  ret i32 %mul1, !dbg !18\n\}\n\{ in line: 1 file: ./testcase/src/power3B.c \}AddrPE: [13\<--14]  ; Function Attrs: nounwind readnone speculatable willreturn\ndeclare void @llvm.dbg.declare(metadata, metadata, metadata) #1\n\{  \}AddrPE: [19\<--20]  ; Function Attrs: nounwind readnone speculatable willreturn\ndeclare void @llvm.dbg.value(metadata, metadata, metadata) #1\n\{  \}}"];
+}

@@ -1,0 +1,37 @@
+digraph "ICFG" {
+	label="ICFG";
+
+	Node0x103e0af30 [shape=record,color=green,label="{NodeID: 15\nFunExitBlockNode ID: 15 Exit(\{ ln: 11 fl: ./testcase/src/testvalueptr.c \})\n \{fun: main\}}"];
+	Node0x103e0ad20 [shape=record,color=black,label="{NodeID: 14\nIntraBlockNode ID: 14   ret i32 0, !dbg !17 \{fun: main\}}"];
+	Node0x103e0ad20 -> Node0x103e0af30[style=solid];
+	Node0x103e0a1e0 [shape=record,color=blue,label="{NodeID: 13\nRetBlockNode ID: 13   call void @sink(i32* %injection), !dbg !16 \{fun: main\}}"];
+	Node0x103e0a1e0 -> Node0x103e0ad20[style=solid];
+	Node0x103e0a080 [shape=record,color=red,label="{NodeID: 12\nCallBlockNode ID: 12   call void @sink(i32* %injection), !dbg !16 \{fun: main\}|{|<s1>0x103e075e0}}"];
+	Node0x103e0a080 -> Node0x103e0a1e0[style=solid];
+	Node0x103e0a080:s1 -> Node0x103e04df0[style=solid,color=red];
+	Node0x103e07e80 [shape=record,color=black,label="{NodeID: 11\nIntraBlockNode ID: 11   store i32 %call, i32* %injection, align 4, !dbg !14 \{fun: main\}}"];
+	Node0x103e07e80 -> Node0x103e0a080[style=solid];
+	Node0x103e07c60 [shape=record,color=blue,label="{NodeID: 10\nRetBlockNode ID: 10   %call = call i32 @source(), !dbg !15 \{fun: main\}}"];
+	Node0x103e07c60 -> Node0x103e07e80[style=solid];
+	Node0x103e07ae0 [shape=record,color=red,label="{NodeID: 9\nCallBlockNode ID: 9   %call = call i32 @source(), !dbg !15 \{fun: main\}|{|<s1>0x103e07388}}"];
+	Node0x103e07ae0 -> Node0x103e07c60[style=solid];
+	Node0x103e07ae0:s1 -> Node0x103e04a00[style=solid,color=red];
+	Node0x103e05310 [shape=record,color=black,label="{NodeID: 8\nIntraBlockNode ID: 8   %injection = alloca i32, align 4 \{fun: main\}AddrPE: [55\<--56]    %injection = alloca i32, align 4\{ ln: 11 fl: ./testcase/src/testvalueptr.c \}}"];
+	Node0x103e05310 -> Node0x103e07ae0[style=solid];
+	Node0x103e05200 [shape=record,color=yellow,label="{NodeID: 7\nFunEntryBlockNode ID: 7 Entry(\{ in line: 10 file: ./testcase/src/testvalueptr.c \})\n \{fun: main\}}"];
+	Node0x103e05200 -> Node0x103e048e0[style=solid];
+	Node0x103e05200 -> Node0x103e05310[style=solid];
+	Node0x103e05080 [shape=record,color=green,label="{NodeID: 6\nFunExitBlockNode ID: 6 Exit(\{ ln: 0  cl: 0  fl: ./testcase/src/testvalueptr.c \})\n \{fun: sink\}|{<s0>0x103e075e0}}"];
+	Node0x103e05080:s0 -> Node0x103e0a1e0[style=solid,color=blue];
+	Node0x103e04ed0 [shape=record,color=black,label="{NodeID: 5\nIntraBlockNode ID: 5   ret void, !dbg !16 \{fun: sink\}}"];
+	Node0x103e04ed0 -> Node0x103e05080[style=solid];
+	Node0x103e04df0 [shape=record,color=yellow,label="{NodeID: 4\nFunEntryBlockNode ID: 4 Entry(\{ in line: 7 file: ./testcase/src/testvalueptr.c \})\n \{fun: sink\}}"];
+	Node0x103e04df0 -> Node0x103e04ed0[style=solid];
+	Node0x103e04c90 [shape=record,color=green,label="{NodeID: 3\nFunExitBlockNode ID: 3 Exit(\{ ln: 4  cl: 5  fl: ./testcase/src/testvalueptr.c \})\n \{fun: source\}|{<s0>0x103e07388}}"];
+	Node0x103e04c90:s0 -> Node0x103e07c60[style=solid,color=blue];
+	Node0x103e04ae0 [shape=record,color=black,label="{NodeID: 2\nIntraBlockNode ID: 2   ret i32 1, !dbg !13 \{fun: source\}}"];
+	Node0x103e04ae0 -> Node0x103e04c90[style=solid];
+	Node0x103e04a00 [shape=record,color=yellow,label="{NodeID: 1\nFunEntryBlockNode ID: 1 Entry(\{ in line: 3 file: ./testcase/src/testvalueptr.c \})\n \{fun: source\}}"];
+	Node0x103e04a00 -> Node0x103e04ae0[style=solid];
+	Node0x103e048e0 [shape=record,color=purple,label="{NodeID: 0\nCopyPE: [2\<--3]  i8* null\{ Can only get source location for instruction, argument, global var or function. \}AddrPE: [35\<--36]  ; Function Attrs: noinline nounwind ssp uwtable\ndefine i32 @source() #0 !dbg !8 \{\nentry:\n  ret i32 1, !dbg !13\n\}\n\{ in line: 3 file: ./testcase/src/testvalueptr.c \}AddrPE: [40\<--41]  ; Function Attrs: noinline nounwind ssp uwtable\ndefine void @sink(i32* %s) #0 !dbg !14 \{\nentry:\n  call void @llvm.dbg.value(metadata i32* %s, metadata !18, metadata !DIExpression()), !dbg !19\n  ret void, !dbg !20\n\}\n\{ in line: 7 file: ./testcase/src/testvalueptr.c \}AddrPE: [46\<--47]  ; Function Attrs: nounwind readnone speculatable willreturn\ndeclare void @llvm.dbg.declare(metadata, metadata, metadata) #1\n\{  \}AddrPE: [52\<--53]  ; Function Attrs: noinline nounwind ssp uwtable\ndefine i32 @main() #0 !dbg !21 \{\nentry:\n  %injection = alloca i32, align 4\n  call void @llvm.dbg.declare(metadata i32* %injection, metadata !22, metadata !DIExpression()), !dbg !23\n  %call = call i32 @source(), !dbg !24\n  store i32 %call, i32* %injection, align 4, !dbg !23\n  call void @sink(i32* %injection), !dbg !25\n  ret i32 0, !dbg !26\n\}\n\{ in line: 10 file: ./testcase/src/testvalueptr.c \}AddrPE: [63\<--64]  ; Function Attrs: nounwind readnone speculatable willreturn\ndeclare void @llvm.dbg.value(metadata, metadata, metadata) #1\n\{  \}}"];
+}

@@ -1,0 +1,27 @@
+digraph "PAG" {
+	label="PAG";
+
+	Node0x103e0d450 [shape=record,shape=Mrecord,label="{[main] RetPN ID: 54 unique return node for function main}"];
+	Node0x103e0d150 [shape=record,shape=Mrecord,label="{[source] RetPN ID: 37 unique return node for function source|{<s0>\{ ln: 11  cl: 21  fl: ./testcase/src/testvalueptr.c \}}}"];
+	Node0x103e0d150:s0 -> Node0x103e0c310[color=black,style=dotted];
+	Node0x103e0d080 [shape=record,shape=septagon,label="{[main] FIObjPN ID: 56 (base object)   %injection = alloca i32, align 4 \{ ln: 11 fl: ./testcase/src/testvalueptr.c \}}"];
+	Node0x103e0d080 -> Node0x103e0c190[color=green];
+	Node0x103e0cf10 [shape=record,shape=septagon,label="{[main] FIObjPN ID: 53 (base object) main \{ in line: 10 file: ./testcase/src/testvalueptr.c \}}"];
+	Node0x103e0cf10 -> Node0x103e0c0d0[color=green];
+	Node0x103e0cbe0 [shape=record,shape=septagon,label="{[sink] FIObjPN ID: 41 (base object) sink \{ in line: 7 file: ./testcase/src/testvalueptr.c \}}"];
+	Node0x103e0cbe0 -> Node0x103e0b970[color=green];
+	Node0x103e0caa0 [shape=record,shape=septagon,label="{[source] FIObjPN ID: 36 (base object) source \{ in line: 3 file: ./testcase/src/testvalueptr.c \}}"];
+	Node0x103e0caa0 -> Node0x103e0b6d0[color=green];
+	Node0x103e0c190 [shape=record,shape=circle,label="{[main] ValPN ID: 55   %injection = alloca i32, align 4 \{ ln: 11 fl: ./testcase/src/testvalueptr.c \}|{<s0>\{ ln: 12  cl: 5  fl: ./testcase/src/testvalueptr.c \}}}"];
+	Node0x103e0c190:s0 -> Node0x103e0ba30[color=black,style=dashed];
+	Node0x103e0c0d0 [shape=record,shape=circle,label="{[main] ValPN ID: 52 ; Function Attrs: noinline nounwind ssp uwtable\ndefine i32 @main() #0 !dbg !21 \{\nentry:\n  %injection = alloca i32, align 4\n  call void @llvm.dbg.declare(metadata i32* %injection, metadata !22, metadata !DIExpression()), !dbg !23\n  %call = call i32 @source(), !dbg !24\n  store i32 %call, i32* %injection, align 4, !dbg !23\n  call void @sink(i32* %injection), !dbg !25\n  ret i32 0, !dbg !26\n\}\n \{ in line: 10 file: ./testcase/src/testvalueptr.c \}}"];
+	Node0x103e0b350 [shape=record,shape=diamond,label="{DummyValPN ID: 3}"];
+	Node0x103e0b350 -> Node0x103e0b280[color=black];
+	Node0x103e0b970 [shape=record,shape=circle,label="{[sink] ValPN ID: 40 ; Function Attrs: noinline nounwind ssp uwtable\ndefine void @sink(i32* %s) #0 !dbg !14 \{\nentry:\n  call void @llvm.dbg.value(metadata i32* %s, metadata !18, metadata !DIExpression()), !dbg !19\n  ret void, !dbg !20\n\}\n \{ in line: 7 file: ./testcase/src/testvalueptr.c \}}"];
+	Node0x103e0ba30 [shape=record,shape=circle,label="{[sink] ValPN ID: 43 i32* %s \{ 0th arg sink in line: 7 file: ./testcase/src/testvalueptr.c \}}"];
+	Node0x103e0b280 [shape=record,shape=diamond,label="{DummyValPN ID: 2}"];
+	Node0x103e0c310 [shape=record,shape=circle,label="{[main] ValPN ID: 58   %call = call i32 @source(), !dbg !15 \{ ln: 11  cl: 21  fl: ./testcase/src/testvalueptr.c \}}"];
+	Node0x103e0c310 -> Node0x103e0c190[color=blue];
+	Node0x103e0b6d0 [shape=record,shape=circle,label="{[source] ValPN ID: 35 ; Function Attrs: noinline nounwind ssp uwtable\ndefine i32 @source() #0 !dbg !8 \{\nentry:\n  ret i32 1, !dbg !13\n\}\n \{ in line: 3 file: ./testcase/src/testvalueptr.c \}}"];
+	Node0x103e0b1d0 [shape=record,shape=Mcircle,label="{DummyObjPN ID: 1}"];
+}
